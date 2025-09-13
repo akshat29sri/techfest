@@ -1,0 +1,202 @@
+<!--
+One-file: Creative One-Section Landing Page
+Pure HTML + CSS, no JavaScript.
+Save as `one-section-landing.html` and open in your browser.
+Designed to be responsive and eye-catching with a hero animation.
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Spark — One-Section Landing</title>
+  <style>
+    :root{
+      --bg1: #0f1724;
+      --bg2: #0b1220;
+      --accent: #ff7a59;
+      --accent-2: #7afcff;
+      --glass: rgba(255,255,255,0.06);
+      --text: #e6eef8;
+      --muted: rgba(230,238,248,0.72);
+      --maxw: 1100px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;}
+    body{
+      margin:0;font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      background: radial-gradient(1200px 600px at 10% 20%, rgba(122,252,255,0.04), transparent),
+                  radial-gradient(900px 500px at 90% 80%, rgba(255,122,89,0.03), transparent),
+                  linear-gradient(180deg,var(--bg1),var(--bg2));
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
+    }
+
+    /* HERO SECTION */
+    .hero{
+      min-height:100vh;display:grid;place-items:center;padding:3.5rem 1.25rem;
+      position:relative;overflow:hidden;
+    }
+
+    .container{
+      width:100%;max-width:var(--maxw);margin:0 auto;position:relative;z-index:3;display:grid;grid-template-columns:1fr 460px;gap:2.5rem;align-items:center;
+    }
+
+    /* Content Column */
+    .intro{
+      padding:2rem 2.25rem;border-radius:20px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));backdrop-filter: blur(6px);
+      box-shadow: 0 10px 30px rgba(2,6,23,0.55);
+    }
+    h1{
+      font-size:clamp(2rem,6.4vw,3.6rem);line-height:1;letter-spacing:-0.02em;margin:0 0 .65rem 0;display:flex;align-items:center;gap:.8rem;
+    }
+    h1 .spark{display:inline-block;padding:.3rem .6rem;border-radius:10px;background:linear-gradient(90deg,var(--accent),#ffb07f);color:#081219;font-weight:700;font-size:.8rem}
+    p.lead{margin:0 0 1.35rem 0;color:var(--muted);font-size:1.05rem}
+
+    .cta-row{display:flex;gap:1rem;align-items:center;margin-top:.6rem}
+    .btn{
+      appearance:none;border:0;padding:.85rem 1.05rem;border-radius:12px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:.6rem;
+      transition:transform .25s ease, box-shadow .25s ease;box-shadow:0 6px 18px rgba(2,6,23,0.5);
+      background:linear-gradient(90deg,var(--accent), #ffb07f);color:#081219;text-decoration:none;font-size:1rem
+    }
+    .btn:active{transform:translateY(1px)}
+    .btn.secondary{
+      background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--text);padding:.75rem 1rem;font-weight:600
+    }
+
+    /* Visual Column */n
+    .visual{
+      position:relative;padding:2rem;border-radius:20px;min-height:300px;display:flex;align-items:center;justify-content:center;overflow:visible
+    }
+
+    /* Floating card */
+    .card{
+      width:360px;max-width:100%;height:220px;border-radius:16px;background:linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.04);
+      display:flex;flex-direction:column;gap:.5rem;padding:1rem;backdrop-filter: blur(8px);box-shadow:0 20px 50px rgba(4,8,18,0.6);
+      transform:translateY(0) rotate(0deg);animation:float 6s ease-in-out infinite;
+    }
+    .card .top{display:flex;align-items:center;gap:.75rem}
+    .dot{width:12px;height:12px;border-radius:50%;background:linear-gradient(180deg,var(--accent),var(--accent-2));box-shadow:0 6px 20px rgba(122,252,255,0.08) inset}
+    .chip{height:10px;width:70px;border-radius:6px;background:linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02))}
+    .card .title{font-weight:700}
+    .card .meta{margin-top:auto;display:flex;justify-content:space-between;align-items:center;color:var(--muted)}
+
+    /* Animated background orbs */
+    .orb{position:absolute;border-radius:50%;filter:blur(40px);opacity:.9;mix-blend-mode:screen}
+    .orb.one{width:520px;height:520px;left:-10%;top:5%;background:radial-gradient(circle at 30% 30%, rgba(122,252,255,0.18), transparent 30%) ;animation:orb-anim 12s linear infinite}
+    .orb.two{width:360px;height:360px;right:-10%;bottom:0;background:radial-gradient(circle at 70% 70%, rgba(255,122,89,0.12), transparent 30%);animation:orb-anim 10s linear reverse infinite}
+    .orb.three{width:220px;height:220px;left:50%;top:-8%;transform:translateX(-50%);background:radial-gradient(circle at 40% 60%, rgba(122,252,255,0.08), transparent 30%);animation:orb-anim 16s linear infinite}
+
+    @keyframes orb-anim{
+      0%{transform: translateY(0) scale(1) rotate(0deg)}
+      50%{transform: translateY(-16px) scale(1.06) rotate(20deg);}
+      100%{transform: translateY(0) scale(1) rotate(0deg)}
+    }
+
+    @keyframes float{
+      0%{transform:translateY(0) rotate(-2deg)}
+      50%{transform:translateY(-16px) rotate(6deg)}
+      100%{transform:translateY(0) rotate(-2deg)}
+    }
+
+    /* Text reveal lines */
+    .reveal{display:inline-block;overflow:hidden;vertical-align:bottom}
+    .reveal span{display:inline-block;transform:translateY(110%);animation:reveal 1s cubic-bezier(.2,.9,.2,1) forwards}
+    .reveal span.delay{animation-delay:.12s}
+    .reveal span.delay2{animation-delay:.24s}
+    @keyframes reveal{to{transform:translateY(0)}}
+
+    /* subtle gradient sweep on heading */
+    .shine{background:linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.18), rgba(255,255,255,0.06));-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 3s linear infinite}
+    @keyframes shine{0%{background-position:-200px 0}100%{background-position:400px 0}}
+
+    /* small footer badges */
+    .badges{display:flex;gap:.6rem;margin-top:1.05rem}
+    .badge{font-size:.8rem;padding:.35rem .6rem;border-radius:999px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03)}
+
+    /* Responsive */
+    @media (max-width:900px){
+      .container{grid-template-columns:1fr;}
+      .visual{order:-1;margin-bottom:1rem}
+      .card{margin:0 auto}
+      .intro{padding:1.25rem}
+    }
+
+    /* Accessibility: reduce motion */
+    @media (prefers-reduced-motion: reduce){
+      .orb, .card, .reveal span, .shine{animation: none !important}
+    }
+  </style>
+</head>
+<body>
+  <main class="hero" role="main">
+    <!-- animated orbs -->
+    <div class="orb one" aria-hidden="true"></div>
+    <div class="orb two" aria-hidden="true"></div>
+    <div class="orb three" aria-hidden="true"></div>
+
+    <div class="container">
+      <section class="intro" aria-labelledby="hero-heading">
+        <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem">
+          <div style="width:52px;height:52px;border-radius:12px;background:linear-gradient(135deg,var(--accent-2),var(--accent));display:flex;align-items:center;justify-content:center;font-weight:800;color:#071018">S</div>
+          <div style="line-height:1">
+            <div style="font-size:.9rem;font-weight:600;color:var(--muted)">SPARK CREATIVE</div>
+            <div style="font-size:.78rem;color:rgba(230,238,248,0.5)">One-section product landing</div>
+          </div>
+        </div>
+
+        <h1 id="hero-heading"><span class="spark">New</span>
+          <span class="reveal"><span>Build</span></span>
+          <span class="reveal delay"><span>&nbsp;smarter</span></span>
+          <span class="reveal delay2"><span>&nbsp;— ship faster</span></span>
+        </h1>
+
+        <p class="lead">A minimal, focused landing experience — hero animation, subtle motion and a clear call to action. Perfect for side projects, launches, or just to flex your frontend muscle.</p>
+
+        <div class="cta-row">
+          <a class="btn" href="#" role="button">Get early access →</a>
+          <a class="btn secondary" href="#" role="button">Learn more</a>
+        </div>
+
+        <div class="badges" aria-hidden="true">
+          <div class="badge">⚡ Lightweight</div>
+          <div class="badge">🎨 Pure HTML/CSS</div>
+          <div class="badge">📱 Responsive</div>
+        </div>
+      </section>
+
+      <aside class="visual" aria-hidden="true">
+        <div class="card" role="img" aria-label="Animated preview card">
+          <div class="top">
+            <div class="dot" aria-hidden="true"></div>
+            <div style="flex:1">
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <div class="title">Spark Studio</div>
+                <div class="chip" aria-hidden="true"></div>
+              </div>
+              <div style="font-size:.85rem;color:var(--muted);margin-top:.4rem">Realtime previews · Templates · Tiny bundle</div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:.6rem;margin-top:1.1rem;align-items:center">
+            <div style="width:46px;height:46px;border-radius:12px;background:linear-gradient(90deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;font-weight:700">A</div>
+            <div style="flex:1">
+              <div style="font-weight:700">Launchboard</div>
+              <div style="font-size:.86rem;color:var(--muted)">Metrics · Shares · Integrations</div>
+            </div>
+          </div>
+
+          <div class="meta">
+            <div>Active · 1.3k+</div>
+            <div style="font-size:.9rem">v0.9</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+  
+</body>
+</html>
